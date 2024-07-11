@@ -2,7 +2,7 @@
 
 **LiterCultura** é um projeto desenvolvido como parte do desafio **Oracle Next Education**, focado em criar um catálogo de livros interativo através do console. Integra uma API de livros, manipulação de dados JSON e um banco de dados para oferecer uma experiência completa aos usuários interessados em explorar e interagir com informações sobre livros.
 
-![Tela do Projeto]("Liter Cultura.png")
+![Tela do Projeto](Liter%20Cultura.png)
 
 ## Descrição
 
