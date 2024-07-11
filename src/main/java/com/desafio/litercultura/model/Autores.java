@@ -2,6 +2,9 @@ package com.desafio.litercultura.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "autores")
 public class Autores {
@@ -11,6 +14,9 @@ public class Autores {
     private String nomeAutor;
     private Integer anoNascimento;
     private Integer anoMorte;
+
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.MERGE, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Livros> livro = new ArrayList<>();
 
     public Autores() {}
 
@@ -50,5 +56,16 @@ public class Autores {
 
     public void setAnoMorte(Integer anoMorte) {
         this.anoMorte = anoMorte;
+    }
+
+    public List<Livros> getLivro() {
+        return livro;
+    }
+
+    @Override
+    public String toString() {
+        return   getNomeAutor() +
+                " *Ano Nascimento: " + getAnoNascimento() + "*" +
+                " *Ano de Morte: " + getAnoMorte() + "*";
     }
 }

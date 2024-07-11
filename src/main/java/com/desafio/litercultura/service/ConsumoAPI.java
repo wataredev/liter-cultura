@@ -13,17 +13,12 @@ public class ConsumoAPI {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(endereco))
                 .build();
-        HttpResponse<String> response = null;
+        HttpResponse<String> response;
         try {
-            response = client
-                    .send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.body();
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException("Erro ao obter dados da API", e);
         }
-
-        String json = response.body();
-        return json;
     }
 }

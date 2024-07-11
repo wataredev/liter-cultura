@@ -3,6 +3,9 @@ package com.desafio.litercultura.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "livros")
 public class Livros {
@@ -13,11 +16,18 @@ public class Livros {
     private String idioma;
     private Integer numDownloads;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "autor_id")
+    private Autores autor;
+
+
     public Livros() {}
+
 
     public Livros(DadosLivros dados) {
         this.titulo = dados.titulo();
         this.numDownloads = dados.numDownloads();
+        this.idioma = dados.idioma().get(0);
     }
 
     public Long getId() {
@@ -52,10 +62,21 @@ public class Livros {
         this.numDownloads = numDownloads;
     }
 
+    public void setAutor(Autores dadosAutor) {
+        this.autor = dadosAutor;
+    }
+
+    public Autores getAutor() {
+        return autor;
+    }
+
     @Override
     public String toString() {
-        return  "titulo='" + titulo + '\'' +
-                ", numDownloads=" + numDownloads +
-                '}';
+        return " ----- LIVRO ----- "
+                +"\nTítulo: " + getTitulo()
+                +"\nIdioma: " + getIdioma()
+                +"\nAutor: " + getAutor()
+                +"\nTotal Downloads: " + getNumDownloads()
+                +"\n-----------------";
     }
 }
